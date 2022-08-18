@@ -19,14 +19,20 @@ const userSchema = new User (
                 validator: function(v) {
                     return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(v);
                 },
-                message: props => `${prop.value} is not a valid email address!`
+                message: props => `${props.value} is not a valid email address!`
             },
         }
     },
     {
-        thoughts: {
-
-        }
+        thoughts: [thoughtSchema] 
+    },
+    {                                                                                 
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],                                                         
     }
 
 );
