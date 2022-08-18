@@ -27,7 +27,7 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // delete a thought
+    // delete a user
     deleteUser(req, res) {
         Thought.findOneAndDelete({ _id: req.params.userId })
             .then((user) => 
@@ -38,7 +38,7 @@ module.exports = {
             .then(() => res.json({ message: "User and thoughts deleted!" }))
             .catch((err) => res.status(500).json(err));
     },
-    // update a thought
+    // update a user
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
