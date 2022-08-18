@@ -50,7 +50,7 @@ module.exports = User;
 
 // needed routes for api/users
 
-// get all users
+// get all users -- so far this one works
 // get a single user by it's _id
 // post a new user
 // put to update a user by it's _id
