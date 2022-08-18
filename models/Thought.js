@@ -1,5 +1,5 @@
-const { Schema, Model, default: mongoose } = require('mongoose');
-
+const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const thoughtSchema = new Schema (
     {
         thoughtText: {
@@ -54,6 +54,18 @@ thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
-const Thought = Model('thought', thoughtSchema);
+const Thought = mongoose.model('thought', thoughtSchema);
 
 module.exports = Thought;
+
+// needed routes
+// /api/thoughts
+// get all thoughts
+// get a single thought by it's _id
+// post a new thoughtwith thought _id pushed to user's thoughts array field
+// put to update a thought by it's id
+// delete to remove 
+
+// api/thoughts/:thoughtId/reactions
+// post to create a reaction stored in thought's array reactions field
+// delete to pull and remove a reaction by the reactionId value

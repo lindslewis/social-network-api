@@ -1,4 +1,5 @@
-const { Schema, Model } = require('mongoose');
+const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose')
 const thoughtSchema = require('./Thought');
 
 const userSchema = new mongoose.Schema (
@@ -43,6 +44,18 @@ userSchema.virtual('friendCount').get(function () {
 });
 
 
-const User = mongoose.Model('user', userSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
+
+// needed routes for api/users
+
+// get all users
+// get a single user by it's _id
+// post a new user
+// put to update a user by it's _id
+// delete user (bonus to have it also removed a user's thoughts when their account is deleted)
+
+// routes for api/users/:userId/friends/:friendId
+// post to add a new friend to a friend list
+// delete to remove the friend
