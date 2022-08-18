@@ -9,7 +9,7 @@ module.exports = {
     },
     // find singular user
     getSingleUser(req, res) {
-        User.findOne({ _id: req.params.id})
+        User.findOne({ _id: req.params.userId})
             .select('username')
             .then((user) => 
             !user
