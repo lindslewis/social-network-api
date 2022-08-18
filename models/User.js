@@ -53,7 +53,7 @@ module.exports = User;
 // get all users -- so far this one works
 // get a single user by it's _id -- 404 works but doesn't recognize the id
 // post a new user-- so far this one works too. 
-// put to update a user by it's _id
+// put to update a user by it's _id --this works
 // delete user (bonus to have it also removed a user's thoughts when their account is deleted)
 
 // routes for api/users/:userId/friends/:friendId
