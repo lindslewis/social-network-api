@@ -38,4 +38,18 @@ module.exports = {
             .then(() => res.json({ message: "Thought and reactions deleted!" }))
             .catch((err) => res.status(500).json(err));
     },
-}
+    // update a thought
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+            .then((thought) => 
+            !thought
+                ? res.status(404).json({ message: 'No thought with this ID' })
+                : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+};
