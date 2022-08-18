@@ -1,4 +1,4 @@
-const { Schema, Model } = require('mongoose');
+const { Schema, Model, default: mongoose } = require('mongoose');
 
 const thoughtSchema = new Schema (
     {
@@ -13,7 +13,7 @@ const thoughtSchema = new Schema (
         // not sure how to do the getter
         createdAt: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
             // get: 
         }
     },
@@ -23,16 +23,31 @@ const thoughtSchema = new Schema (
             type: String,
             required: true,
         }
+    },
+    {
+        // this is a subdoc schema, not sure if I laid it out right though
+        reactions: [
+            {
+            type: Schema.Types.ObjectId,
+            reactionId: mongoose.ObjectId,
+            reactionBody:{
+                type: String,
+                required: true,
+                minLength: 1,
+                maxLength: 280,
+            },
+            username: {
+                type: String,
+                required: true,
+            },
+            // getter method here too
+            createdAt: {
+                type: Date,
+                default: Date.now,
+            }
+           }
+        ]
     }
-    // {
-    //     // how???
-    //     reactions: [
-    //         {
-    //         type: Schema.Types.ObjectId,
-    //         reactionId: ObjectId
-    //        }
-    //     ]
-    // }
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
