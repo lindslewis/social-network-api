@@ -59,7 +59,7 @@ module.exports = User;
 // get a single user by it's _id -- seems to work
 // post a new user-- so far this one works too. 
 // put to update a user by it's _id --this works
-// delete user (bonus to have it also removed a user's thoughts when their account is deleted) -- does not work, get a 404. doesn't recognize id
+// delete user (bonus to have it also removed a user's thoughts when their account is deleted) -- fixed, not sure if it actually deletes the thoughts tho
 
 // routes for api/users/:userId/friends/:friendId
 // post to add a new friend to a friend list
