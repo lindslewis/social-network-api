@@ -30,15 +30,15 @@ module.exports = {
             })
             .then((User) => 
             !User
-                ?res.status(404).json({
+                ? res.status(404).json({
                     message: "No user found with that ID"
                 })
                 : res.json('Posted new thought!')
             )
-            .catch((err) => {
-                console.log(err);
-                return res.status(500).json(err);
-            }); 
+            .catch((err) => res.status(500).json(err));
+            // .catch((err) => {
+            //     console.log(err);res.status(500).json(err);
+            // }); 
     },
     // delete a thought
     deleteThought(req, res) {
