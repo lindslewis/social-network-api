@@ -65,4 +65,13 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
+    // post a reaction (I think it's here???)
+    //  /api/thoughts/:thoughtId/reactions
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: { thought: { reactions: req.params.reactionsId }}}
+        )
+        .then()
+    }
 };
