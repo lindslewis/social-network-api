@@ -66,12 +66,18 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // post a reaction (I think it's here???)
+    // this doesn't feel right, especially the spot that it sets at
     //  /api/thoughts/:thoughtId/reactions
     createReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $set: { thought: { reactions: req.params.reactionsId }}}
+            { $set: { thought: { reactions: req.params.reactionsBody }}}
         )
-        .then()
-    }
+        .then((thought) => 
+            !thought
+                ? res.status(404).json({ message: "No thought found with that ID"})
+                : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err)); 
+    },
 };
