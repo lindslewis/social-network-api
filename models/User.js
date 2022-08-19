@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema (
         }
     },
     {
-        thoughts: [thoughtSchema] 
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ] 
     },
     {                                                                                 
         friends: [
