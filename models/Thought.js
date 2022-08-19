@@ -60,7 +60,7 @@ module.exports = Thought;
 
 // needed routes
 // /api/thoughts
-// get all thoughts
+// get all thoughts  --seems to work
 // get a single thought by it's _id
 // post a new thoughtwith thought _id pushed to user's thoughts array field
 // put to update a thought by it's id
