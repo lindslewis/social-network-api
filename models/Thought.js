@@ -17,6 +17,12 @@ const thoughtSchema = new Schema (
             // get: 
         }
     },
+    // {
+    //     toJSON: {
+    //         getters: true,
+    //     },
+    //     id:false
+    // },
     {
         // do I need to have a reference in here to User?
         username: {
@@ -28,23 +34,23 @@ const thoughtSchema = new Schema (
         // this is a subdoc schema, not sure if I laid it out right though
         reactions: [
             {
-            type: Schema.Types.ObjectId,
-            reactionId: mongoose.ObjectId,
-            reactionBody:{
-                type: String,
-                required: true,
-                minLength: 1,
-                maxLength: 280,
-            },
-            username: {
-                type: String,
-                required: true,
-            },
-            // getter method here too
-            createdAt: {
-                type: Date,
-                default: Date.now,
-            }
+                type: Schema.Types.ObjectId,
+                reactionId: mongoose.ObjectId,
+                reactionBody:{
+                    type: String,
+                    required: true,
+                    minLength: 1,
+                    maxLength: 280,
+                },
+                username: {
+                    type: String,
+                    required: true,
+                },
+                // getter method here too
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                }
            }
         ]
     }
