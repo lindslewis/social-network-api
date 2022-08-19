@@ -21,11 +21,24 @@ module.exports = {
     // create a thought
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
+            .then((thought) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: thought.thoughtId }},
+                    { new: true }
+                );
+            })
+            .then((User) => 
+            !User
+                ?res.status(404).json({
+                    message: "No user found with that ID"
+                })
+                : res.json('Posted new thought!')
+            )
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
-            });
+            }); 
     },
     // delete a thought
     deleteThought(req, res) {
