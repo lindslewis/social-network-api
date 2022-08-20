@@ -67,8 +67,8 @@ module.exports = Thought;
 // needed routes
 // /api/thoughts
 // get all thoughts  --seems to work
-// get a single thought by it's _id
-// post a new thoughtwith thought _id pushed to user's thoughts array field
+// get a single thought by it's _id -- does not grab, doesn't recognize the id
+// post a new thoughtwith thought _id pushed to user's thoughts array field -- can create but isn't pushing
 // put to update a thought by it's id
 // delete to remove 
 
