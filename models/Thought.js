@@ -75,3 +75,6 @@ module.exports = Thought;
 // api/thoughts/:thoughtId/reactions
 // post to create a reaction stored in thought's array reactions field
 // delete to pull and remove a reaction by the reactionId value
+
+
+// am I going to need to use an aggregate??? look into it for pushing the thoughts and reactions to users
