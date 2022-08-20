@@ -11,10 +11,14 @@ module.exports = {
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId})
             .select('-__v')
-            .then((user) => 
+            .then(async (user) => 
             !user
                 ? res.status(404).json({ message: 'No user with that ID'})
-                : res.json(user)
+                : res.json({
+                    user,
+                    thought: await thought(req.params.userId)
+                })
+                   
             )
             .catch((err) => res.status(500).json(err));
     },
