@@ -73,7 +73,7 @@ module.exports = Thought;
 // delete to remove --500 internal error, but is actually deleting the thought, regardless
 
 // api/thoughts/:thoughtId/reactions
-// post to create a reaction stored in thought's array reactions field
+// post to create a reaction stored in thought's array reactions field-- posting the information, but not seeing it anywhere
 // delete to pull and remove a reaction by the reactionId value
 
 

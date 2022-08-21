@@ -75,9 +75,11 @@ module.exports = {
     // this doesn't feel right, especially the spot that it sets at
     //  /api/thoughts/:thoughtId/reactions
     createReaction(req, res) {
+        console.log(req.body);
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $set: { thought: { reactions: req.params.reactionsBody, createdAt: new Date(0), updatedAt: new Date(0)}}}
+            { $addToSet: { thought: req.body}},
+            { runValidators: true, new: true }
         )
         .then((thought) => 
             !thought
