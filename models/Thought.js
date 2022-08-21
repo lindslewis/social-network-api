@@ -74,7 +74,7 @@ module.exports = Thought;
 
 // api/thoughts/:thoughtId/reactions
 // post to create a reaction stored in thought's array reactions field-- posting the information, but not seeing it anywhere
-// delete to pull and remove a reaction by the reactionId value
+// delete to pull and remove a reaction by the reactionId value - got a 200 ok but not sure how to check if it actually did it since the rest of my stuff isn't pulling up
 
 
 // am I going to need to use an aggregate??? look into it for pushing the thoughts and reactions to users
