@@ -77,7 +77,7 @@ module.exports = {
     createReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $set: { thought: { reactions: req.params.reactionsBody }}}
+            { $set: { thought: { reactions: req.params.reactionsBody, createdAt: new Date(0), updatedAt: new Date(0)}}}
         )
         .then((thought) => 
             !thought
@@ -86,4 +86,11 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err)); 
     },
+
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { } 
+        )
+    }
 };
