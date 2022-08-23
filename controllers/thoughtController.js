@@ -1,8 +1,12 @@
 const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
+
+const reactionCount = async () =>
+    Thought.aggregate()
+        .count('')
 // aggregate function to collect user reactions???
-const reaction = async (thoughtId) => 
+const reactions = async (thoughtId) => 
     Thought.aggregate([
         // matching to only a single thought
         { $match: { _id: ObjectId(thoughtId)}},
@@ -33,7 +37,7 @@ module.exports = {
                 : res.json({
                     thought,
                     // reaction is gonna be aggregate oml lindsay
-                    reaction: await reaction(req.params.thoughtId)
+                    reactions: await reactions(req.params.thoughtId)
                 })
             )
             .catch((err) => {
@@ -47,7 +51,7 @@ module.exports = {
             .then((thought) => {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
-                    { $push: { thoughts: thought.thoughtId }},
+                    { $push: { thoughts: thought.reactions.reactionId }},
                     { new: true }
                 );
             })

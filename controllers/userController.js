@@ -71,7 +71,10 @@ module.exports = {
     },
     // add a friend
     addFriend(req, res) {
-        
+        // User.findOneAndUpdate(
+        //     { _id: req.params.userId},
+        //     { }
+        // )
     },
     removeFriend(req, res) {
 
