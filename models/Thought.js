@@ -47,15 +47,15 @@ const thoughtSchema = new Schema (
                     default: Date.now,
                 },
            },
-           {
-            toJSON: {
-                getters:true,
-                virtuals:true,
-            },
-            id: false,
-           }
         ]
-    }
+    },
+    {
+        toJSON: {
+            getters:true,
+            virtuals:true,
+        },
+        id: false,
+    },
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
