@@ -55,6 +55,7 @@ userSchema.virtual('friendCount').get(function () {
 });
 
 
+
 const User = mongoose.model('user', userSchema);
 
 module.exports = User;
