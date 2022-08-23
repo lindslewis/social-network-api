@@ -1,6 +1,8 @@
-// const { connect, connection } = require('mongoose');
+const { connect, connection } = require('mongoose');
 
-// const connectionString = 
-// process.env.MONGODB_URI || mongodb://
+connect('mongodb://localhost/usersThoughts', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-// don't think I actually need this???
+module.exports = connection;

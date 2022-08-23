@@ -1,4 +1,24 @@
+const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
+
+
+const reactionCount = async () =>
+    Thought.aggregate()
+        .count('')
+// aggregate function to collect user reactions???
+const reactions = async (thoughtId) => 
+    Thought.aggregate([
+        // matching to only a single thought
+        { $match: { _id: ObjectId(thoughtId)}},
+        // deconstructing the array
+        { $unwind: '$thoughts', },
+        {
+            $group: {
+                _id: ObjectId(thoughtId),
+            }
+        }
+    ])
+
 
 module.exports = {
     // find all thoughts
@@ -9,23 +29,43 @@ module.exports = {
     },
     // find a singular thought
     getSingleThought(req, res) {
-        Thought.findOne({ _id: req.params.id })
-            .select('thought')
-            .then((thought) => 
+        Thought.findOne({ _id: req.params.thoughtId })
+            .select('-__v')
+            .then(async (thought) => 
             !thought
                 ? res.status(404).json({ message: 'No thought with that ID' })
-                : res.json(thought)
+                : res.json({
+                    thought,
+                    // reaction is gonna be aggregate oml lindsay
+                    reactions: await reactions(req.params.thoughtId)
+                })
             )
-            .catch((err) => res.status(500).json(err));
+            .catch((err) => {
+                console.log(err);
+                 return res.status(500).json(err);
+            });
     },
     // create a thought
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
-            .catch((err) => {
-                console.log(err);
-                return res.status(500).json(err);
-            });
+            .then((thought) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: thought.reactions.reactionId }},
+                    { new: true }
+                );
+            })
+            .then((User) => 
+            !User
+                ? res.status(404).json({
+                    message: "No user found with that ID"
+                })
+                : res.json('Posted new thought!')
+            )
+            .catch((err) => res.status(500).json(err));
+            // .catch((err) => {
+            //     console.log(err);res.status(500).json(err);
+            // }); 
     },
     // delete a thought
     deleteThought(req, res) {
@@ -51,5 +91,37 @@ module.exports = {
                 : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
+    },
+    // post a reaction (I think it's here???)
+    // this doesn't feel right, especially the spot that it sets at
+    //  /api/thoughts/:thoughtId/reactions
+    createReaction(req, res) {
+        console.log(req.body);
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { thought: req.body}},
+            { runValidators: true, new: true }
+        )
+        .then((thought) => 
+            !thought
+                ? res.status(404).json({ message: "No thought found with that ID"})
+                : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err)); 
+    },
+
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reaction: { reactionId: req.params.reactionId} } },
+            { runValidators: true, new: true } 
+        )
+        .then((thought) => 
+            !thought
+                ? res
+                    .status(404).json({ message: "No thought found with this ID"})
+                : res.json(thought)
+        )
+       .catch((err) => res.status(500).json(err));
     },
 };
