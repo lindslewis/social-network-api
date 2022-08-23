@@ -9,13 +9,14 @@ module.exports = {
     },
     // find a singular thought
     getSingleThought(req, res) {
-        Thought.findOne({ _id: req.params.id })
+        Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
             .then(async (thought) => 
             !thought
                 ? res.status(404).json({ message: 'No thought with that ID' })
                 : res.json({
                     thought,
+                    // reaction is gonna be aggregate oml lindsay
                     reaction: await reaction(req.params.thoughtId)
                 })
             )
