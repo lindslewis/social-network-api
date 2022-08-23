@@ -23,23 +23,29 @@ const userSchema = new mongoose.Schema (
                 },
                 message: props => `${props.value} is not a valid email address!`
             },
-        }
+        },
     },
     {
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Thought'
-            }
-        ] 
+            },
+        ],
     },
     {                                                                                 
         friends: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
-            }
+            },
         ],                                                         
+    },
+    {
+        toJSON: {
+            virtuals:true,
+        },
+        id:false,
     }
 
 );

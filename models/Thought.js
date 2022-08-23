@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
+
 const thoughtSchema = new Schema (
     {
         thoughtText: {
@@ -10,19 +11,13 @@ const thoughtSchema = new Schema (
         }
     },
     {
-        // not sure how to do the getter
+
         createdAt: {
             type: Date,
             default: Date.now,
             // get: 
         }
     },
-    // {
-    //     toJSON: {
-    //         getters: true,
-    //     },
-    //     id:false
-    // },
     {
         // do I need to have a reference in here to User?
         username: {
@@ -55,6 +50,7 @@ const thoughtSchema = new Schema (
            {
             toJSON: {
                 getters:true,
+                virtuals:true,
             },
             id: false,
            }
