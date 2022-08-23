@@ -1,4 +1,15 @@
+const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
+
+// aggregate function to collect user reactions???
+const reaction = async (thoughtId) => 
+    Thought.aggregate([
+        // matching to only a single thought
+        { $match: { _id: ObjectId(thoughtId)}},
+        // deconstructing the array
+        { $}
+    ])
+
 
 module.exports = {
     // find all thoughts
