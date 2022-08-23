@@ -7,7 +7,12 @@ const reaction = async (thoughtId) =>
         // matching to only a single thought
         { $match: { _id: ObjectId(thoughtId)}},
         // deconstructing the array
-        { $}
+        { $unwind: '$thoughts', },
+        {
+            $group: {
+                _id: ObjectId(thoughtId),
+            }
+        }
     ])
 
 
