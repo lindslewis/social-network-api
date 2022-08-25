@@ -2,9 +2,10 @@ const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 
-const reactionCount = async () =>
+const thoughtCount = async () =>
     Thought.aggregate()
-        .count('')
+        .count('reactionCount')
+        .then((numberOfReactions) => numberOfReactions);
 // aggregate function to collect user reactions???
 const reactions = async (thoughtId) => 
     Thought.aggregate([
@@ -27,7 +28,7 @@ module.exports = {
             .then(async (thoughts) => {
                 const thoughtObj ={
                     thoughts,
-                    reactionCount: await reactionCount(),
+                    thoughtCount: await thoughtCount(),
                 };
                 return res.json(thoughtObj);
             })
