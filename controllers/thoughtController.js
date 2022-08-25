@@ -24,8 +24,17 @@ module.exports = {
     // find all thoughts
     getThoughts(req, res) {
         Thought.find()
-            .then((thoughts) => res.json(thoughts))
-            .catch((err) => res.status(500).json(err));
+            .then(async (thoughts) => {
+                const thoughtObj ={
+                    thoughts,
+                    reactionCount: await reactionCount(),
+                };
+                return res.json(thoughtObj);
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.status(500).json(err);
+            });
     },
     // find a singular thought
     getSingleThought(req, res) {
@@ -47,6 +56,7 @@ module.exports = {
             });
     },
     // create a thought
+    // does it need to be async??
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
@@ -64,6 +74,7 @@ module.exports = {
                 : res.json('Posted new thought!')
             )
             .catch((err) => res.status(500).json(err));
+            console.log(err)
             // .catch((err) => {
             //     console.log(err);res.status(500).json(err);
             // }); 
