@@ -27,31 +27,34 @@ const thoughtSchema = new Schema (
         }
     },
     {
-        // this is a subdoc schema, not sure if I laid it out right though
-        // Hint: we need a new model in ./models/Reactions.js -> import model into this file -> [modelname]
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                reactionId: mongoose.ObjectId,
-                reactionBody:{
-                    type: String,
-                    required: true,
-                    minLength: 1,
-                    maxLength: 280,
-                },
-                username: {
-                    type: String,
-                    required: true,
-                },
-                // getter method here too
-                createdAt: {
-                    type: Date,
-                    default: Date.now,
-                },
-                // add toJson: {getters:boolean?}
-           },
-        ]
+        reaction: [Reaction]
     },
+    // {
+    //     // this is a subdoc schema, not sure if I laid it out right though
+    //     // Hint: we need a new model in ./models/Reactions.js -> import model into this file -> [modelname]
+    //     reactions: [
+    //         {
+    //             type: Schema.Types.ObjectId,
+    //             reactionId: mongoose.ObjectId,
+    //             reactionBody:{
+    //                 type: String,
+    //                 required: true,
+    //                 minLength: 1,
+    //                 maxLength: 280,
+    //             },
+    //             username: {
+    //                 type: String,
+    //                 required: true,
+    //             },
+    //             // getter method here too
+    //             createdAt: {
+    //                 type: Date,
+    //                 default: Date.now,
+    //             },
+    //             // add toJson: {getters:boolean?}
+    //        },
+    //     ]
+    // },
     {
         toJSON: {
             getters:true,
