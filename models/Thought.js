@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
+const { Reaction, User } = require('../models');
 
 const thoughtSchema = new Schema (
     {
@@ -15,7 +16,7 @@ const thoughtSchema = new Schema (
         createdAt: {
             type: Date,
             default: Date.now,
-            // get: 
+            // get: ex: something => thefuncFromOtherFile(something)
         }
     },
     {
@@ -27,6 +28,7 @@ const thoughtSchema = new Schema (
     },
     {
         // this is a subdoc schema, not sure if I laid it out right though
+        // Hint: we need a new model in ./models/Reactions.js -> import model into this file -> [modelname]
         reactions: [
             {
                 type: Schema.Types.ObjectId,
@@ -46,6 +48,7 @@ const thoughtSchema = new Schema (
                     type: Date,
                     default: Date.now,
                 },
+                // add toJson: {getters:boolean?}
            },
         ]
     },

@@ -47,8 +47,7 @@ module.exports = {
                 ? res.status(404).json({ message: 'No thought with that ID' })
                 : res.json({
                     thought,
-                    // reaction is gonna be aggregate oml lindsay
-                    reactions: await reactions(req.params.thoughtId)
+                    reactions: await reactions(req.params.reactionId)
                 })
             )
             .catch((err) => {
@@ -86,7 +85,7 @@ module.exports = {
             .then((thought) => 
             !thought
                 ? res.status(404).json({ message: "No thought with that ID" })
-                : Reactions.deleteMany({ _id: { $in: thought.reactions }})
+                : reactions.deleteMany({ _id: { $in: thought.reactions }})
             )
             .then(() => res.json({ message: "Thought and reactions deleted!" }))
             .catch((err) => res.status(500).json(err));
