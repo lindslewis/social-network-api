@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
 const { Thought, Reaction } = require('../models');
 
-const userSchema = new mongoose.Schema (
+const userSchema = new Schema (
     {
         username: {
             type: String,
@@ -34,12 +34,12 @@ const userSchema = new mongoose.Schema (
         // ],
     },
     {                                                                                 
-        friends: [User]
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'User'
-        //     },
-        // ],                                                         
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            },
+        ],                                                         
     },
     {
         toJSON: {

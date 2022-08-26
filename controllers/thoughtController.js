@@ -1,9 +1,9 @@
 const { ObjectId } = require('mongoose').Types;
-const { User, Thought } = require('../models');
+const { User, Thought, Reaction } = require('../models');
 
 
 const thoughtCount = async () =>
-    Thought.aggregate()
+    Reaction.aggregate()
         .count('reactionCount')
         .then((numberOfReactions) => numberOfReactions);
 // aggregate function to collect user reactions???
@@ -15,7 +15,7 @@ const reactions = async (thoughtId) =>
         { $unwind: '$thoughts', },
         {
             $group: {
-                _id: ObjectId(thoughtId),
+                _id: ObjectId(reactons),
             }
         }
     ])

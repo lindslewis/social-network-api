@@ -29,6 +29,9 @@ const thoughtSchema = new Schema (
     {
         reaction: [Reaction]
     },
+    {
+        user_id: [User]
+    },
     // {
     //     // this is a subdoc schema, not sure if I laid it out right though
     //     // Hint: we need a new model in ./models/Reactions.js -> import model into this file -> [modelname]
