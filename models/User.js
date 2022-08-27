@@ -1,51 +1,48 @@
 const { Schema, model } = require('mongoose');
-const mongoose = require('mongoose')
-const thoughtSchema = require('./Thought');
+const mongoose = require('mongoose');
+const { Thought, Reaction } = require('../models');
 
-const userSchema = new mongoose.Schema (
+const userSchema = new Schema(
     {
         username: {
             type: String,
             unique: true,
             required: true,
             trim: true,
-        }
-    },
-    {
+        },
+
         email: {
             type: String,
             required: true,
             unique: true,
             validate: {
                 // think I'm gonna need to use a custom validator function, found the regex pattern from regex libraries. .test tests for a match
-                validator: function(v) {
+                validator: function (v) {
                     return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(v);
                 },
                 message: props => `${props.value} is not a valid email address!`
             },
         },
-    },
-    {
+
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Thought'
             },
         ],
-    },
-    {                                                                                 
+
         friends: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             },
-        ],                                                         
+        ],
     },
     {
         toJSON: {
-            virtuals:true,
+            virtuals: true,
         },
-        id:false,
+        id: false,
     }
 
 );
@@ -56,7 +53,7 @@ userSchema.virtual('friendCount').get(function () {
 
 
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
 

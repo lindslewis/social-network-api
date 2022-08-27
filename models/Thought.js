@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
+const { Reaction, User } = require('../models');
+const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema (
     {
@@ -8,61 +10,38 @@ const thoughtSchema = new Schema (
             minLength: 1,
             maxLength: 280,
             required: true,
-        }
-    },
-    {
+        },
 
         createdAt: {
             type: Date,
             default: Date.now,
-            // get: 
-        }
-    },
-    {
+            // timestamp Lindsay
+            // get: ex: something => thefuncFromOtherFile(something)
+        },
+ 
         // do I need to have a reference in here to User?
         username: {
             type: String,
             required: true,
-        }
+        },
+ 
+        reaction: [reactionSchema]
     },
+    
     {
-        // this is a subdoc schema, not sure if I laid it out right though
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                reactionId: mongoose.ObjectId,
-                reactionBody:{
-                    type: String,
-                    required: true,
-                    minLength: 1,
-                    maxLength: 280,
-                },
-                username: {
-                    type: String,
-                    required: true,
-                },
-                // getter method here too
-                createdAt: {
-                    type: Date,
-                    default: Date.now,
-                },
-           },
-           {
-            toJSON: {
-                getters:true,
-                virtuals:true,
-            },
-            id: false,
-           }
-        ]
-    }
+        toJSON: {
+            getters:true,
+            virtuals:true,
+        },
+        id: false,
+    },
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
-    return this.reactions.length;
+    return this.reaction.length;
 });
 
-const Thought = mongoose.model('thought', thoughtSchema);
+const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought;
 
@@ -80,3 +59,33 @@ module.exports = Thought;
 
 
 // am I going to need to use an aggregate??? look into it for pushing the thoughts and reactions to users
+
+// {
+    //     user_id: [User]
+    // },
+    // {
+    //     // this is a subdoc schema, not sure if I laid it out right though
+    //     // Hint: we need a new model in ./models/Reactions.js -> import model into this file -> [modelname]
+    //     reactions: [
+    //         {
+    //             type: Schema.Types.ObjectId,
+    //             reactionId: mongoose.ObjectId,
+    //             reactionBody:{
+    //                 type: String,
+    //                 required: true,
+    //                 minLength: 1,
+    //                 maxLength: 280,
+    //             },
+    //             username: {
+    //                 type: String,
+    //                 required: true,
+    //             },
+    //             // getter method here too
+    //             createdAt: {
+    //                 type: Date,
+    //                 default: Date.now,
+    //             },
+    //             // add toJson: {getters:boolean?}
+    //        },
+    //     ]
+    // },

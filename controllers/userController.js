@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models');
+const { User, Thought, Reaction } = require('../models');
 
 module.exports = {
     // find all users
@@ -71,6 +71,14 @@ module.exports = {
     },
     // add a friend
     addFriend(req, res) {
+        // User.findOne({ _id: req.params.postId })
+        //     .then((user) => {
+        //     if (!user)
+        //         // ? res.status(404).json({message: "no users with that ID"})
+        //         // : res.json()
+        //     else
+            
+        //     }) 
         // User.findOneAndUpdate(
         //     { _id: req.params.userId},
         //     { }
