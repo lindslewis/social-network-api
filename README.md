@@ -31,12 +31,14 @@ Reaction's routes are contained within Thought (post to create a reaction, delet
 
 This app utilized 2 different dependencies for it's creation and usage. 
 
--[Express](https://www.npmjs.com/package/express)
--[Mongoose](https://www.npmjs.com/package/mongoose)
+- [Express](https://www.npmjs.com/package/express)
+
+- [Mongoose](https://www.npmjs.com/package/mongoose)
 
 It also involved the usage of the app, [Insomnia](https://insomnia.rest/), which is used outside of the users code editing software as a standalone application.
 
 ## credits
 
--University of Washington Bootcamp Instructors and Teaching Assistants
--[Mongoose Docs](https://mongoosejs.com/docs/api.html)
+- University of Washington Bootcamp Instructors and Teaching Assistants
+
+- [Mongoose Docs](https://mongoosejs.com/docs/api.html)
