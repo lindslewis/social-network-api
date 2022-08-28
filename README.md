@@ -13,6 +13,8 @@ This application was created for the backend of a social networking site, creati
 
 ## walkthrough-video
 
+[Walkthrough Video](social-network-api.webm)
+
 ## usage
 
 This app is ran through insomnia, allowing a social networking company to test their routes before deploying. In order to use this, the user will need to walk through each of the functions that are provided, filling in the necessary information in order to see the functionality of the application. 
